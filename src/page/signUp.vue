@@ -23,8 +23,8 @@
           </el-form-item>
           <el-form-item>
             <el-radio-group v-model="signupForm.sex">
-              <el-radio label="男" value="男"></el-radio>
-              <el-radio label="女" value="女"></el-radio>
+              <el-radio label="男" value="1"></el-radio>
+              <el-radio label="女" value="0"></el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item prop="phone_number">

@@ -20,7 +20,7 @@
           <span>联系方式：</span>&nbsp<span>{{user.phone_number}}</span>
         </li>
       </ul>
-      <el-card class="avatar"><img src="/static/logo.png" class="image"></el-card>
+      <el-card class="avatar"><img :src=baseImgPath class="image"></el-card>
     </el-card>
 
   </div>
@@ -30,11 +30,13 @@
   import headTop from '../components/headTop'
   import {getUserInfo} from '../api/getData'
   import {getStore} from '../config/mUtils'
+  import {baseImgPath} from '../config/env'
 
   export default {
     data() {
       return {
-        user:null
+        user:null,
+        baseImgPath
       }
     },
     created() {
@@ -51,6 +53,8 @@
           let rst = await getUserInfo(local_info.user_id);
           if(rst.ok){
             this.user=rst.content;
+            if(rst.content.sex==="1") this.user.sex='男';
+            else this.user.sex='女'
             //return rst.content;
           }else {
             this.user=null
@@ -62,6 +66,12 @@
           });
         }
 
+      }
+    },
+    watch:{
+      '$route' (to, from) {
+        // 对路由变化作出响应...
+        this.init_data()
       }
     },
   }

@@ -66,7 +66,7 @@
 
   .avator {
     .wh(36px, 36px);
-    //border-radius: 50%;
+    border-radius: 50%;
     margin-right: 37px;
   }
 

@@ -10,6 +10,9 @@ const check = r => require.ensure([], () => r(require('@/page/check')), 'check')
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const userinfo = r => require.ensure([], () => r(require('@/page/user')), 'user');
 const editinfo = r => require.ensure([], () => r(require('@/page/updateUser')), 'updateUser');
+const upload = r => require.ensure([], () => r(require('@/page/upload')), 'upload');
+const historyList = r => require.ensure([], () => r(require('@/page/historyList')), 'historyList');
+const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
 
 
 
@@ -36,11 +39,32 @@ export default new Router({
           path:'/editinfo',
           component:editinfo,
           meta:['用户管理','信息修改']
+        },
+        {
+          path:'/upload',
+          component:upload,
+          meta:['审核表管理','提交审核表']
+        },
+        {
+          path:'/history',
+          component:historyList,
+          meta:['历史记录','历史审核表']
+        },
+        {
+          path:'/explain',
+          component:explain,
+          meta:['说明','说明']
         }
       ]
     },{
       path:'/check',
-      component:check
+      component:check,
+      children:[
+        {
+          path:'',
+          component:home
+        }
+      ]
     }
   ]
 })

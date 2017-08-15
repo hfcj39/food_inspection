@@ -8,7 +8,7 @@
  */
 let baseUrl = '';
 let routerMode = 'history';
-let baseImgPath = '/static/logo.png';
+let baseImgPath = '/static/default_user.jpg';
 
 if (process.env.NODE_ENV === 'development') {
   //baseUrl = 'http://118.89.103.204:3000';
