@@ -22,14 +22,17 @@
         <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
       </el-collapse-item>
     </el-collapse>
+    <foot></foot>
   </div>
 </template>
 
 <script>
   import headTop from '../components/headTop'
+  import foot from '../components/foot'
   export default {
     components: {
       headTop,
+      foot
     },
   }
 </script>

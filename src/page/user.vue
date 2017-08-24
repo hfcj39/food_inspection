@@ -22,12 +22,13 @@
       </ul>
       <el-card class="avatar"><img :src=baseImgPath class="image"></el-card>
     </el-card>
-
+    <foot></foot>
   </div>
 </template>
 
 <script>
   import headTop from '../components/headTop'
+  import foot from '../components/foot'
   import {getUserInfo} from '../api/getData'
   import {getStore} from '../config/mUtils'
   import {baseImgPath} from '../config/env'
@@ -44,6 +45,7 @@
     },
     components: {
       headTop,
+      foot
     },
     methods   : {
       init_data: async function() {

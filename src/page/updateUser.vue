@@ -38,11 +38,13 @@
     </el-form>
       </el-col>
     </el-row>
+    <foot></foot>
   </div>
 </template>
 
 <script>
   import headTop from '../components/headTop'
+  import foot from '../components/foot'
   import {getUserInfo,updateUserInfo} from '../api/getData'
   import {getStore} from '../config/mUtils'
 
@@ -81,6 +83,7 @@
     },
     components: {
       headTop,
+      foot
     },
     methods   : {
       init_data: async function() {

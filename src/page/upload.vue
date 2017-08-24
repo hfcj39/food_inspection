@@ -128,11 +128,13 @@
         </el-dialog>
       </el-col>
     </el-row>
+    <foot></foot>
   </div>
 </template>
 
 <script>
   import headTop from '@/components/headTop'
+  import foot from '../components/foot'
   import {getUserInfo, getScoreTable, uploadTable} from '../api/getData'
   import {getStore} from '../config/mUtils'
 
@@ -156,6 +158,7 @@
     },
     components: {
       headTop,
+      foot
     },
     created() {
       this.initData();

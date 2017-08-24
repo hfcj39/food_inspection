@@ -4,20 +4,20 @@
     <section class="data_section">
       <div class="section_title">FUCK U HAOQI</div>
     </section>
-    <div class="ft">上海海洋大学 版权所有 {{date}} 极栈信息科技有限责任公司 技术支持</div>
+    <foot></foot>
   </div>
 </template>
 
 <script>
   import headTop from '../components/headTop'
+  import foot from '../components/foot'
   export default {
     data(){
-      return {
-        date:new Date().getFullYear()
-      }
+      return {}
     },
     components: {
-      headTop
+      headTop,
+      foot
     }
 
   }
@@ -26,7 +26,7 @@
 <style lang="less">
   @import '../style/mixin';
   .data_section{
-    height: 70%;
+    height: 60%;
     padding: 20px;
     //margin-bottom: 40px;
     .section_title{
@@ -35,12 +35,5 @@
       //margin-bottom: 10px;
     }
   }
-  .ft{
-    .wh(100%,150px);
-    color: #8197ab;
-    text-align: center;
-    padding-top:85px;
-    position: relative;
-    background-color: #EFF2F7;
-  }
+
 </style>

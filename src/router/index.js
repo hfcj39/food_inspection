@@ -13,6 +13,8 @@ const editinfo = r => require.ensure([], () => r(require('@/page/updateUser')), 
 const upload = r => require.ensure([], () => r(require('@/page/upload')), 'upload');
 const historyList = r => require.ensure([], () => r(require('@/page/historyList')), 'historyList');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+const teacherList = r => require.ensure([], () => r(require('@/page/teacherList')), 'teacherList');
+const checkApplication = r => require.ensure([], () => r(require('@/page/checkApplication')), 'checkApplication');
 
 
 
@@ -63,6 +65,23 @@ export default new Router({
         {
           path:'',
           component:home
+        },{
+          path:'/userinfo_check',
+          component:userinfo,
+          meta:['用户管理','用户信息']
+        },{
+          path:'/teacherList',
+          component:teacherList,
+          meta:['用户管理','教师列表']
+        },
+        {
+          path:'/explain_check',
+          component:explain,
+          meta:['说明','说明']
+        },{
+          path:'/checkApplication',
+          component:checkApplication,
+          meta:['审核表管理','待审核申请']
         }
       ]
     }

@@ -38,3 +38,9 @@ export const getScoreTable = async data => await fetch('/score_table/table.php',
  * @param data
  */
 export const uploadTable = async data => await fetch('/user/user_check_upload.php',data,'POST');
+/**
+ * 查询教师列表
+ * @param data
+ */
+export const getTeacherList = async data => await fetch('/checker/teacher_list.php',data,'POST');
+export const getCheckList = async data => await fetch('/checker/not_check_list.php',data,'POST');
