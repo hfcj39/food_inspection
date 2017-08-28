@@ -43,4 +43,23 @@ export const uploadTable = async data => await fetch('/user/user_check_upload.ph
  * @param data
  */
 export const getTeacherList = async data => await fetch('/checker/teacher_list.php',data,'POST');
+/**
+ * 获取未审核列表
+ * @param data
+ */
 export const getCheckList = async data => await fetch('/checker/not_check_list.php',data,'POST');
+/**
+ * 审核员审核接口
+ * @param data
+ */
+export const check = async data => await fetch('/checker/check.php',data,'POST');
+/**
+ * 审核员删除评分项目
+ * @param data
+ */
+export const deleteScore = async data => await fetch('/score_table/delete_score_table.php',data,'POST');
+/**
+ * 审核员修改评分项目
+ * @param data
+ */
+export const editScore = async data => await fetch('/table/modify_score_table.php',data,'POST');

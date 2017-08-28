@@ -137,7 +137,7 @@
         this.tableData = this.allData.slice(offset, offset + 15);
       },
       handleInfo(row) {
-        console.log(...row.content);
+        //console.log(...row.content);
         this.detailData = [];
         this.detailData.push(...row.content);
         this.dialogTableVisible = true;

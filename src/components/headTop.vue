@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import {removeStore} from '../config/mUtils'
+  import {getStore,removeStore} from '../config/mUtils'
   import {baseImgPath} from '@/config/env'
   //import {mapActions, mapState} from 'vuex'
 
@@ -38,7 +38,9 @@
 //      ...mapActions(['getAdminData']),
       async handleCommand(command) {
         if(command === 'home') {
-          this.$router.push('/manage');
+          let user_info =JSON.parse(getStore('user_info'));
+          if(user_info.role==='教师') this.$router.push('/manage');
+          else if(user_info.role==='审核员') this.$router.push('/check');
         } else if(command === 'singout') {
           removeStore('user_info');
           this.$message({

@@ -19,6 +19,7 @@
             <router-link to="/register"><el-button class="submit_btn">注册</el-button></router-link>
           </el-form-item>
         </el-form>
+        <foot></foot>
       </section>
     </transition>
   </div>
@@ -28,9 +29,10 @@
   import {login} from '../api/getData';
   import {setStore} from '../config/mUtils'
   import ElFormItem from "../../node_modules/element-ui/packages/form/src/form-item.vue";
+  import foot from '../components/foot'
 
   export default {
-    components: {ElFormItem},
+    components: {ElFormItem,foot},
     data() {
       return {
         loginForm: {

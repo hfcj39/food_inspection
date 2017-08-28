@@ -15,6 +15,8 @@ const historyList = r => require.ensure([], () => r(require('@/page/historyList'
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
 const teacherList = r => require.ensure([], () => r(require('@/page/teacherList')), 'teacherList');
 const checkApplication = r => require.ensure([], () => r(require('@/page/checkApplication')), 'checkApplication');
+const addScore = r => require.ensure([], () => r(require('@/page/addScore')), 'addScore');
+const scoreTable = r => require.ensure([], () => r(require('@/page/scoreTable')), 'scoreTable');
 
 
 
@@ -82,6 +84,16 @@ export default new Router({
           path:'/checkApplication',
           component:checkApplication,
           meta:['审核表管理','待审核申请']
+        },
+        {
+          path:'/addScore',
+          component:addScore,
+          meta:['评分表管理','新增评分项目']
+        },
+        {
+          path:'/scoreTable',
+          component:scoreTable,
+          meta:['评分表管理','评分表一览']
         }
       ]
     }

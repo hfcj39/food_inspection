@@ -15,8 +15,8 @@
           </el-submenu>
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-star-on"></i>评分表管理</template>
-            <el-menu-item index="visitor">评分表一览</el-menu-item>
-            <el-menu-item index="visitor">新增评分项目</el-menu-item>
+            <el-menu-item index="scoreTable">评分表一览</el-menu-item>
+            <el-menu-item index="addScore">新增评分项目</el-menu-item>
           </el-submenu>
           <el-submenu index="5">
             <template slot="title"><i class="el-icon-warning"></i>说明</template>

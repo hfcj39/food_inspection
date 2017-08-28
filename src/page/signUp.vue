@@ -37,6 +37,7 @@
             <router-link to="/"><el-button class="submit_btn">返回</el-button></router-link>
           </el-form-item>
         </el-form>
+        <foot></foot>
       </section>
     </transition>
   </div>
@@ -45,10 +46,12 @@
 <script>
   import {signup} from '../api/getData'
   import ElFormItem from '../../node_modules/element-ui/packages/form/src/form-item.vue';
+  import foot from '../components/foot'
 
   export default {
     components: {
       ElFormItem,
+      foot
     },
     data() {
       return {
