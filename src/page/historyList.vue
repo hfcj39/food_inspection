@@ -115,7 +115,7 @@
         if(local_info) {
           this.tableData = [];
           local_info = JSON.parse(local_info);
-          let rst = await getHistoryList(local_info.user_id);
+          let rst = await getHistoryList({user_id:local_info.user_id});
           if(rst.ok) {
             this.allData = rst.content;
             this.tableData = rst.content.slice(0, 15);

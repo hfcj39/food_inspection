@@ -26,14 +26,6 @@
         baseImgPath,
       }
     },
-//    created(){
-//      if (!this.adminInfo.id) {
-//        this.getAdminData()
-//      }
-//    },
-//    computed: {
-//      ...mapState(['adminInfo']),
-//    },
     methods: {
 //      ...mapActions(['getAdminData']),
       async handleCommand(command) {

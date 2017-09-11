@@ -52,7 +52,7 @@
         let local_info = getStore('user_info');
         if(local_info) {
           local_info = JSON.parse(local_info);
-          let rst = await getUserInfo(local_info.user_id);
+          let rst = await getUserInfo({user_id:local_info.user_id});
           if(rst.ok){
             this.user=rst.content;
             if(rst.content.sex==="1") this.user.sex='男';

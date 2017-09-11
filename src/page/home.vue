@@ -46,7 +46,7 @@
     methods   : {
       async init_data() {
         let info = JSON.parse(getStore('user_info'));
-        let rst = await getUserInfo(info.user_id);
+        let rst = await getUserInfo({user_id:info.user_id});
         this.username = rst.content.username;
         this.role = rst.content.role;
       },

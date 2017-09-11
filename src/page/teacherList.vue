@@ -74,7 +74,7 @@
         if(local_info) {
           this.tableData = [];
           local_info = JSON.parse(local_info);
-          let rst = await getTeacherList(local_info.user_id);
+          let rst = await getTeacherList({user_id:local_info.user_id});
           if(rst.ok) {
             this.allData = rst.content;
             this.tableData = rst.content.slice(0, 15);

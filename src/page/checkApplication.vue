@@ -143,7 +143,7 @@
         let local_info = getStore('user_info');
         if(local_info) {
           local_info = JSON.parse(local_info);
-          let rst = await getCheckList(local_info.user_id);
+          let rst = await getCheckList({user_id:local_info.user_id});
           if(rst.ok) {
             this.tableData = rst.content;
           } else {
@@ -157,7 +157,7 @@
         }
       },
       async handleTeacherInfo(row) {
-        let rst = await getUserInfo(row.user_id);
+        let rst = await getUserInfo({user_id:row.user_id});
         this.teacherData = [];
         if(rst.ok) {
           this.teacherData.push(rst.content);
