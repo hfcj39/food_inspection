@@ -170,6 +170,7 @@
         }
       },
       async handleScoreInfo(row) {
+        //todo 修改单位表格显示方式
         this.detailData = [];
         this.detailData.push(...row.content);
         this.dialogDetailTableVisible = true

@@ -71,9 +71,11 @@
           <el-table-column property="third_list" label="分类三"></el-table-column>
           <el-table-column property="forth_list" label="分类四"></el-table-column>
           <el-table-column property="score" label="分数"></el-table-column>
-          <el-table-column property="unit" label="单位"></el-table-column>
-          <el-table-column property="detail.remark2" label="数量一"></el-table-column>
-          <el-table-column property="detail.remark3" label="数量二"></el-table-column>
+          <el-table-column property="detail.remark2" label="数量">
+            <template scope="scope">
+              <span v-for="a,index in scope.row.unit">{{scope.row.detail.remark2[index]}} {{ scope.row.unit[index]}}</span>
+            </template>
+          </el-table-column>
           <el-table-column property="detail.remark1" label="备注"></el-table-column>
         </el-table>
       </el-dialog>
@@ -114,6 +116,7 @@
       headTop,
     },
     methods   : {
+      //TODO 修改表格单位显示方式
       async init_data() {
         let local_info = getStore('user_info');
         if(local_info) {
@@ -143,6 +146,7 @@
         //console.log(...row.content);
         this.detailData = [];
         this.detailData.push(...row.content);
+        console.log(...row.content);
         this.dialogTableVisible = true;
       },
       async handleDelete(index, row) {

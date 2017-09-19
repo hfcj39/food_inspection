@@ -61,7 +61,7 @@
       foot
     },
     methods:{
-      //todo 新增功能
+      //todo 新增功能 http://element.eleme.io/#/zh-CN/component/form 动态增减
       async submitForm(f){
         this.$refs[f].validate(async(valid) => {
           if(valid){

@@ -195,7 +195,7 @@
         }
       },
       async dialog() {
-        //TODO 获取数据 scoreData
+        //TODO 获取数据 scoreData 单位数组显示，显示数组长度文本框
         let rst = await getScoreTable();
         this.scoreData = rst.content;
         this.contentForm.type1=null;

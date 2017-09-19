@@ -129,7 +129,7 @@
         this.loading= false
       },
       async handleEdit(row){
-        //todo 修改功能
+        //todo 修改功能 数组 ；修改单位表格显示方式
 //        console.log(row);
         this.updateForm=row;
         this.dialogTableVisible = true;
