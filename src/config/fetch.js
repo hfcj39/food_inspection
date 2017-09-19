@@ -36,7 +36,19 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 
     try {
       const response = await fetch(url, requestConfig);
-      //console.log(response);
+      let type = response.headers.get('Content-Type');
+      if(type === 'application/octet-stream') {
+        let tmp = await response.blob();
+        let obj_url = window.URL.createObjectURL(tmp);
+        let filename = response.headers.get('Content-Disposition') || 'table.doc';
+        return Promise.resolve({
+          ok        : response.ok,
+          status    : response.status,
+          statusText: response.statusText,
+          filename  : filename,
+          url       : obj_url
+        })
+      }
       const responseJson = await response.json();
       return Promise.resolve({
         ok        : response.ok,

@@ -1,7 +1,7 @@
 <template>
   <div class="fillcontain">
     <head-top></head-top>
-    <p class="explain_text">干好奇审核平台使用说明</p>
+    <p class="explain_text">审核平台使用说明</p>
 
     <el-collapse accordion class="explain">
       <el-collapse-item title="我是教师" name="1">
@@ -22,6 +22,8 @@
         <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
       </el-collapse-item>
     </el-collapse>
+
+
     <foot></foot>
   </div>
 </template>
@@ -29,11 +31,14 @@
 <script>
   import headTop from '../components/headTop'
   import foot from '../components/foot'
+
   export default {
     components: {
       headTop,
       foot
     },
+    methods:{
+    }
   }
 </script>
 

@@ -11,16 +11,16 @@
             <el-input v-model="updateForm.second_list" placeholder="审核项目二级目录"></el-input>
           </el-form-item>
           <el-form-item label="三级目录" prop="role">
-            <el-input v-model="updateForm.second_list" placeholder="审核项目三级目录"></el-input>
+            <el-input v-model="updateForm.third_list" placeholder="审核项目三级目录"></el-input>
           </el-form-item>
           <el-form-item label="四级目录" prop="real_name">
-            <el-input v-model="updateForm.real_name" placeholder="审核内容四级目录"></el-input>
+            <el-input v-model="updateForm.forth_list" placeholder="审核内容四级目录"></el-input>
           </el-form-item>
           <el-form-item label="分数">
-            <el-input v-model="updateForm.second_list" placeholder="审核项目的分数"></el-input>
+            <el-input v-model="updateForm.score" placeholder="审核项目的分数"></el-input>
           </el-form-item>
-          <el-form-item label="XXX" prop="phone_number">
-            <el-input v-model="updateForm.phone_number" placeholder="XXX"></el-input>
+          <el-form-item label="单位" prop="phone_number">
+            <el-input v-model="updateForm.unit" placeholder="单位"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('updateForm')" class="submit_btn">提交</el-button>
@@ -36,6 +36,8 @@
 <script>
   import headTop from '../components/headTop'
   import foot from '../components/foot'
+  import {addScore} from '../api/getData'
+  import {getStore} from '../config/mUtils'
 
   export default {
     data(){
@@ -43,6 +45,10 @@
         updateForm:{
           first_list:'',
           second_list:'',
+          third_list:'',
+          forth_list:'',
+          score:'',
+          unit:''
         }
       };
 
@@ -56,7 +62,59 @@
     },
     methods:{
       //todo 新增功能
-    }
+      async submitForm(f){
+        this.$refs[f].validate(async(valid) => {
+          if(valid){
+            let user_info = getStore('user_info');
+            if(user_info){
+              user_info = JSON.parse(user_info);
+              this.updateForm.user_id = user_info.user_id;
+              this.updateForm.score = parseInt(this.updateForm.score);
+//              console.log(this.updateForm);
+              let rst = await addScore(this.updateForm);
+              if (rst.ok){
+                this.$message({
+                  type   : 'success',
+                  message: '新增成功'
+                });
+                this.$router.push('/scoreTable')
+              }else {
+                this.$message({
+                  type   : 'error',
+                  message: rst.content.message
+                });
+              }
+            }else {
+              this.$message({
+                type   : 'error',
+                message: '请重新登录'
+              });
+            }
+          }else {
+            this.$notify.error({
+              title  : '错误',
+              message: '输入正确的信息',
+              offset : 100
+            });
+            return false;
+          }
+        });
+      }
+    },
+    watch:{
+      '$route' (to, from) {
+        // 对路由变化作出响应...
+        this.updateForm={
+          first_list:'',
+          second_list:'',
+            third_list:'',
+            forth_list:'',
+            score:'',
+            unit:''
+        };
+      }
+    },
+
   }
 </script>
 

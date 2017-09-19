@@ -62,4 +62,10 @@ export const deleteScore = async data => await fetch('/score_table/delete_score_
  * 审核员修改评分项目
  * @param data
  */
-export const editScore = async data => await fetch('/table/modify_score_table.php',data,'POST');
+export const editScore = async data => await fetch('/score_table/modify_score_table.php',data,'POST');
+/**
+ * 审核员增加评分项目
+ * @param data
+ */
+export const addScore = async data => await fetch('/score_table/add_score_table.php',data,'POST');
+export const exportTable = async data => await fetch('/user/export.php',data,'GET');

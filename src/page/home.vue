@@ -8,7 +8,7 @@
 
           <p class="date">{{ date }}</p>
           <p class="time">{{ time }}</p>
-          <p class="text">好奇大纸张~</p>
+          <!--<p class="text">好奇大纸张~</p>-->
 
       </el-card>
       </div>
@@ -94,7 +94,7 @@
     color: #000000;
     background-color: #a5b3ca;
     width: 500px;
-    text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+    /*text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);*/
   }
 
   #clock .time {

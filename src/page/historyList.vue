@@ -52,6 +52,11 @@
             </el-button>
             <el-button
               size="small"
+              type="success"
+              @click="handleExport(scope.row)">导出
+            </el-button>
+            <el-button
+              size="small"
               type="danger"
               :disabled="scope.row.state!=='未审核'"
               @click="handleDelete(scope.$index, scope.row)">撤销
@@ -87,9 +92,8 @@
 
 <script>
   import headTop from '../components/headTop'
-  import {getHistoryList, repeal} from '../api/getData'
+  import {getHistoryList, repeal,exportTable} from '../api/getData'
   import {getStore} from '../config/mUtils'
-
   export default {
     data() {
       return {
@@ -129,7 +133,6 @@
             message: '请重新登录'
           });
         }
-
       },
       handleCurrentChange(val) {
         this.tableData = [];
@@ -182,6 +185,14 @@
           });
         });
       },
+      async handleExport(row){
+        let rst = await exportTable({order_id:row.order_id});
+        let a = document.createElement('a');
+        a.href = rst.url;
+        a.download = rst.filename;
+        a.click();
+        window.URL.revokeObjectURL(rst.url);
+      }
     },
     watch:{
       '$route' (to, from) {
