@@ -97,7 +97,6 @@
               width="180">
             </el-table-column>
             <el-table-column
-              prop="unit"
               label="单位"
               width="180">
               <template scope="scope">
@@ -113,8 +112,7 @@
               :label="'数量' + index"
               :key="index"
             >
-              <el-input v-model="contentForm.type2[index]" style="width: 100px"></el-input>{{' '+domain}}<span>（必填）</span>
-              {{contentForm.type2}}
+              <el-input-number v-model="contentForm.type2[index]" :min="0"></el-input-number>{{' '+domain}}<span>（必填）</span>
             </el-form-item>
             <el-form-item label="备注" >
               <el-input v-model="contentForm.type1" type="textarea" autosize placeholder="请输入项目详细补充或备注"></el-input>
@@ -160,9 +158,6 @@
           selectedScore    : {
             unit:[]
           },
-        },
-        dynamicValidateForm: {
-          domains: [],
         }
       }
     },
@@ -208,21 +203,30 @@
         //TODO 获取数据 scoreData 单位数组显示，显示数组长度文本框
         let rst = await getScoreTable();
         this.scoreData = rst.content;
-        this.contentForm.type1=null;
-        this.contentForm.type2=[];
-//        this.contentForm.type3=0;
-        this.contentForm.selectedScore.unit=[];
+//        this.contentForm.type1=null;
+//        this.contentForm.type2=[];
+//        this.contentForm.selectedScore.unit=[];
         this.dialogFormVisible = true;
       },
       handleCurrentChange(val) {
-        this.contentForm.selectedScore = val;
-        this.dynamicValidateForm.domains=[];
+        if(val){
+          this.contentForm.selectedScore = val;
+        }
+        console.log(val)
+//        this.dynamicValidateForm.domains=[];
 //        console.log(this.contentForm.selectedScore.unit)
       },
       add() {
         if(this.contentForm.selectedScore){
           this.appForm.content.push({...this.contentForm.selectedScore,...this.contentForm});
           console.log(this.contentForm);
+          this.contentForm  = {
+            type2: [],
+              type1: null,
+              selectedScore    : {
+              unit:[]
+            },
+          };
           this.dialogFormVisible = false;
         }else {
           this.$message({
@@ -268,6 +272,17 @@
 
       },
 
+    },
+    watch:{
+      '$route' (to, from) {
+        // 对路由变化作出响应...
+        this.initData();
+        this.appForm          = {
+          name   : '',
+            user_id: '',
+            content: [],
+        }
+      }
     }
   }
 </script>

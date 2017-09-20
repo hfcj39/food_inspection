@@ -21,12 +21,15 @@
           </el-form-item>
 
           <el-form-item
+            :inline="true"
             v-for="(domain, index) in updateForm.unit"
             :label="'单位' + index"
             :key="index"
           >
-            <el-input v-model="updateForm.unit[index]"></el-input>
-            <el-button @click.prevent="removeUnit(domain)">删除</el-button>
+                <el-col :span="18"><el-input v-model="updateForm.unit[index]"></el-input></el-col>
+                <el-button @click.prevent="removeUnit(domain)" style="float: right;" type="danger">删除</el-button>
+
+
           </el-form-item>
 
           <el-form-item>
@@ -108,14 +111,14 @@
           }
         });
       },
-      removeUnit(item){
+      removeUnit(item) {
         let index = this.updateForm.unit.indexOf(item);
 //        console.log(index)
-        if (index !== -1) {
+        if(index !== -1) {
           this.updateForm.unit.splice(index, 1)
         }
       },
-      addUnit(){
+      addUnit() {
         this.updateForm.unit.push('');
       }
     },
@@ -128,7 +131,7 @@
           third_list : '',
           forth_list : '',
           score      : '',
-          unit       : ''
+          unit       : ['']
         };
       }
     },
