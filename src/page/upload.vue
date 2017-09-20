@@ -32,11 +32,10 @@
               </el-table-column>
               <el-table-column
                 prop="type2"
-                label="数量一">
-              </el-table-column>
-              <el-table-column
-                prop="type3"
-                label="数量二">
+                label="数量">
+                <template scope="scope">
+                  <span v-for="a,index in scope.row.type2">{{scope.row.type2[index]}} {{scope.row.selectedScore.unit[index]+'.'}}</span>
+                </template>
               </el-table-column>
               <el-table-column
                 prop="type1"
@@ -62,20 +61,6 @@
           </el-form-item>
         </el-form>
         <el-dialog title="添加评分项" size="full" v-model="dialogFormVisible">
-          <el-form :model="contentForm">
-            <el-form-item label="数量一" label-width="100px">
-              <el-input-number v-model="contentForm.type2" :min="0" :max="100"></el-input-number>
-            </el-form-item>
-            <el-form-item label="数量二" label-width="100px">
-              <el-input-number v-model="contentForm.type3" :min="0" :max="10000"></el-input-number>
-              <a style="margin-left: 20px">不需要则不填</a>
-            </el-form-item>
-            <el-form-item label="备注" label-width="100px">
-              <el-input v-model="contentForm.type1" type="textarea" autosize placeholder="请输入项目详细补充或备注"></el-input>
-            </el-form-item>
-          </el-form>
-
-
           <el-table
             :data="scoreData"
             height="600"
@@ -115,9 +100,29 @@
               prop="unit"
               label="单位"
               width="180">
+              <template scope="scope">
+                <span v-for="a in scope.row.unit">{{ a + '.'}}</span>
+              </template>
             </el-table-column>
           </el-table>
 
+          <el-form :model="contentForm">
+            <el-form-item
+              style="margin-top: 20px"
+              v-for="(domain, index) in contentForm.selectedScore.unit"
+              :label="'数量' + index"
+              :key="index"
+            >
+              <el-input v-model="contentForm.type2[index]" style="width: 100px"></el-input>{{' '+domain}}<span>（必填）</span>
+              {{contentForm.type2}}
+            </el-form-item>
+            <el-form-item label="备注" >
+              <el-input v-model="contentForm.type1" type="textarea" autosize placeholder="请输入项目详细补充或备注"></el-input>
+            </el-form-item>
+
+
+
+          </el-form>
 
           <div slot="footer" class="dialog-footer">
             <router-link to="explain"><a @click="dialogFormVisible = false" style="margin-right: 20px">点击这里阅读说明</a>
@@ -140,6 +145,7 @@
 
   export default {
     data() {
+
       return {
         appForm          : {
           name   : '',
@@ -149,10 +155,14 @@
         scoreData        : [],
         dialogFormVisible: false,
         contentForm      : {
-          type3: null,
-          type2: null,
+          type2: [],
           type1: null,
-          selectedScore    : null,
+          selectedScore    : {
+            unit:[]
+          },
+        },
+        dynamicValidateForm: {
+          domains: [],
         }
       }
     },
@@ -199,16 +209,20 @@
         let rst = await getScoreTable();
         this.scoreData = rst.content;
         this.contentForm.type1=null;
-        this.contentForm.type2=0;
-        this.contentForm.type3=0;
+        this.contentForm.type2=[];
+//        this.contentForm.type3=0;
+        this.contentForm.selectedScore.unit=[];
         this.dialogFormVisible = true;
       },
       handleCurrentChange(val) {
         this.contentForm.selectedScore = val;
+        this.dynamicValidateForm.domains=[];
+//        console.log(this.contentForm.selectedScore.unit)
       },
       add() {
         if(this.contentForm.selectedScore){
           this.appForm.content.push({...this.contentForm.selectedScore,...this.contentForm});
+          console.log(this.contentForm);
           this.dialogFormVisible = false;
         }else {
           this.$message({
@@ -252,7 +266,8 @@
           })
         }
 
-      }
+      },
+
     }
   }
 </script>

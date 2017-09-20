@@ -19,11 +19,19 @@
           <el-form-item label="分数">
             <el-input v-model="updateForm.score" placeholder="审核项目的分数"></el-input>
           </el-form-item>
-          <el-form-item label="单位" prop="phone_number">
-            <el-input v-model="updateForm.unit" placeholder="单位"></el-input>
+
+          <el-form-item
+            v-for="(domain, index) in updateForm.unit"
+            :label="'单位' + index"
+            :key="index"
+          >
+            <el-input v-model="updateForm.unit[index]"></el-input>
+            <el-button @click.prevent="removeUnit(domain)">删除</el-button>
           </el-form-item>
+
           <el-form-item>
             <el-button type="primary" @click="submitForm('updateForm')" class="submit_btn">提交</el-button>
+            <el-button @click="addUnit">新增单位</el-button>
           </el-form-item>
 
         </el-form>
@@ -40,57 +48,57 @@
   import {getStore} from '../config/mUtils'
 
   export default {
-    data(){
-      return{
-        updateForm:{
-          first_list:'',
-          second_list:'',
-          third_list:'',
-          forth_list:'',
-          score:'',
-          unit:''
+    data() {
+      return {
+        updateForm: {
+          first_list : '',
+          second_list: '',
+          third_list : '',
+          forth_list : '',
+          score      : '',
+          unit       : ['']
         }
       };
 
     },
-    created(){
+    created() {
 
     },
-    components:{
+    components: {
       headTop,
       foot
     },
-    methods:{
-      //todo 新增功能 http://element.eleme.io/#/zh-CN/component/form 动态增减
-      async submitForm(f){
+    methods   : {
+      //todo 样式
+      async submitForm(f) {
         this.$refs[f].validate(async(valid) => {
-          if(valid){
+          if(valid) {
             let user_info = getStore('user_info');
-            if(user_info){
+            if(user_info) {
               user_info = JSON.parse(user_info);
               this.updateForm.user_id = user_info.user_id;
               this.updateForm.score = parseInt(this.updateForm.score);
 //              console.log(this.updateForm);
               let rst = await addScore(this.updateForm);
-              if (rst.ok){
+              if(rst.ok) {
                 this.$message({
                   type   : 'success',
                   message: '新增成功'
                 });
                 this.$router.push('/scoreTable')
-              }else {
+              } else {
                 this.$message({
                   type   : 'error',
                   message: rst.content.message
                 });
               }
-            }else {
+            } else {
               this.$message({
                 type   : 'error',
                 message: '请重新登录'
               });
             }
-          }else {
+          } else {
             this.$notify.error({
               title  : '错误',
               message: '输入正确的信息',
@@ -99,18 +107,28 @@
             return false;
           }
         });
+      },
+      removeUnit(item){
+        let index = this.updateForm.unit.indexOf(item);
+//        console.log(index)
+        if (index !== -1) {
+          this.updateForm.unit.splice(index, 1)
+        }
+      },
+      addUnit(){
+        this.updateForm.unit.push('');
       }
     },
-    watch:{
-      '$route' (to, from) {
+    watch     : {
+      '$route'(to, from) {
         // 对路由变化作出响应...
-        this.updateForm={
-          first_list:'',
-          second_list:'',
-            third_list:'',
-            forth_list:'',
-            score:'',
-            unit:''
+        this.updateForm = {
+          first_list : '',
+          second_list: '',
+          third_list : '',
+          forth_list : '',
+          score      : '',
+          unit       : ''
         };
       }
     },
