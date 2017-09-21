@@ -39,7 +39,7 @@
               </el-table-column>
               <el-table-column
                 prop="type1"
-                label="备注">
+                label="项目名称">
               </el-table-column>
               <el-table-column
                 prop="score"
@@ -114,7 +114,7 @@
             >
               <el-input-number v-model="contentForm.type2[index]" :min="0"></el-input-number>{{' '+domain}}<span>（必填）</span>
             </el-form-item>
-            <el-form-item label="备注" >
+            <el-form-item label="项目名称（备注）" >
               <el-input v-model="contentForm.type1" type="textarea" autosize placeholder="请输入项目详细补充或备注"></el-input>
             </el-form-item>
 

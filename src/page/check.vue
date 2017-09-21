@@ -12,6 +12,7 @@
           <el-submenu index="3">
             <template slot="title"><i class="el-icon-document"></i>审核表管理</template>
             <el-menu-item index="checkApplication">待审核申请</el-menu-item>
+            <!--<el-menu-item index="checkerUpload">提交审核表</el-menu-item>-->
           </el-submenu>
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-star-on"></i>评分表管理</template>

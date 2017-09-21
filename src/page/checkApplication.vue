@@ -52,7 +52,7 @@
               <span v-for="a,index in scope.row.unit">{{scope.row.detail.remark2[index]}} {{ scope.row.unit[index]}}</span>
             </template>
           </el-table-column>
-          <el-table-column property="detail.remark1" label="备注"></el-table-column>
+          <el-table-column property="detail.remark1" label="项目名称"></el-table-column>
         </el-table>
       </el-dialog>
 

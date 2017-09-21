@@ -38,6 +38,9 @@
         <el-table-column
           prop="unit"
           label="单位">
+          <template scope="scope">
+            <span v-for="a,index in scope.row.unit">{{ scope.row.unit[index]+'.'}}</span>
+          </template>
         </el-table-column>
         <el-table-column label="操作" width="150px">
           <template scope="scope">
@@ -73,11 +76,21 @@
           <el-form-item label="分数" prop="real_name">
             <el-input v-model="updateForm.score" placeholder="审核项目的分数"></el-input>
           </el-form-item>
-          <el-form-item label="详细内容" prop="phone_number">
-            <el-input v-model="updateForm.unit" placeholder="单位"></el-input>
+
+          <el-form-item
+            :inline="true"
+            v-for="(domain, index) in updateForm.unit"
+            :label="'单位' + index"
+            :key="index"
+          >
+            <el-col :span="18"><el-input v-model="updateForm.unit[index]"></el-input></el-col>
+            <el-button @click.prevent="removeUnit(domain)" style="float: right;" type="danger">删除</el-button>
+
           </el-form-item>
+
           <el-form-item>
             <el-button type="primary" @click="submitForm('updateForm')" class="submit_btn">提交</el-button>
+            <el-button @click="addUnit">新增单位</el-button>
           </el-form-item>
 
         </el-form>
@@ -108,7 +121,7 @@
           third_list:'',
           forth_list:'',
           score:'',
-          unit:''
+          unit:[]
         }
       }
     },
@@ -172,6 +185,16 @@
             message: '已取消删除'
           });
         });
+      },
+      removeUnit(item) {
+        let index = this.updateForm.unit.indexOf(item);
+//        console.log(index)
+        if(index !== -1) {
+          this.updateForm.unit.splice(index, 1)
+        }
+      },
+      addUnit() {
+        this.updateForm.unit.push('');
       },
       async submitForm(form){
         let user_info = getStore('user_info');
